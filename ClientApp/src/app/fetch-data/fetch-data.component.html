@@ -1,0 +1,52 @@
+<h1 id="tableLabel">Weather forecast</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+<p *ngIf="!forecasts"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="forecasts">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Temp. (C)</th>
+      <th>Temp. (F)</th>
+      <th>Summary</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let forecast of forecasts">
+      <td>{{ forecast.date }}</td>
+      <td>{{ forecast.temperatureC }}</td>
+      <td>{{ forecast.temperatureF }}</td>
+      <td>{{ forecast.summary }}</td>
+    </tr>
+  </tbody>
+</table>
+<app-fetch-data></app-fetch-data>
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+  <label for="ph-username">Pornhub username:</label><br>
+  <input type="text" id="ph-username" formControlName="username" placeholder="username" required /><br />
+
+  <label for="ph-password">Pornhub password:</label><br>
+  <input type="text" id="ph-password" formControlName="password" placeholder="password" required /><br />
+
+  <label for="ph-video-url">Pornhub video url:</label><br>
+  <input type="text" id="ph-video-url" placeholder="https://www.pornhub.com/view_video.php?viewkey=ph###" required /><br />
+
+  <label for="ph-comment-text">Comment text:</label><br>
+  <input type="text" id="ph-comment-text" placeholder="Your comment" required /><br />
+
+  <input type="checkbox" id="use-proxy-checkbox" onclick="updateProxyView()" checked />
+  <label for="use-proxy-checkbox">Use proxy</label><br>
+
+  <div id="proxy-view">
+    <label for="proxy-details-div">Proxy details:</label><br>
+    <div id="proxy-details-div">
+      <input type="text" id="proxy-host" placeholder="Host" /><br>
+      <input type="number" id="proxy-port" placeholder="Port" /><br>
+      <input type="text" id="proxy-username" placeholder="Username (optional)" /><br>
+      <input type="password" id="proxy-password" placeholder="Password (optional)" /><br>
+    </div>
+  </div>
+  <button type="submit" class="button" [disabled]="!profileForm.valid">Submit</button>
+</form>
